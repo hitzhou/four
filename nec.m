@@ -22,7 +22,7 @@ function varargout = nec(varargin)
 
 % Edit the above text to modify the response to help nec
 
-% Last Modified by GUIDE v2.5 15-Apr-2016 15:37:20
+% Last Modified by GUIDE v2.5 16-Apr-2016 16:03:57
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -251,4 +251,3 @@ end
 set(handles.axes4,'HandleVisibility','ON');%打开坐标，方便操作
 axes(handles.axes4);%%使用图像，操作在坐标4
 imshow(L);
-
