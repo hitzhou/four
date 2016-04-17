@@ -175,53 +175,7 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% function [psnr_value] = lsb_embed()
-% lsb_embed:  Least Significant Bit Substitution
-%             Watermark Embeding
-% psnr_value: Return the Value of PSNR
-global Igray;
-global watermarked;
-global watermarked_image;
-% read in the cover object 
-cover_object = Igray; 
- 
-% read in the message image 
-message=watermarked; 
-message1=message; 
- 
-% convert to double for normalization, then back again 
-message=double(message);
-message=fix(message./2); 
-message=uint8(message); 
- 
-% determine size of cover object 
-Mc=size(cover_object,1);	%Height 
-Nc=size(cover_object,2);	%Width 
- 
-% determine size of message object 
-Mm=size(message,1);	        %Height 
-Nm=size(message,2);	        %Width 
- 
-% title the message object out to cover object size to generate watermark 
-for ii = 1:Mc 
-    for jj = 1:Nc
-        watermark(ii,jj)=message(mod(ii,Mm)+1,mod(jj,Nm)+1);
-    end 
-end 
-
-% now we set the lsb of cover_object(ii,jj) to the value of watermark(ii,jj) 
-watermarked_image=cover_object; 
-for ii = 1:Mc 
-    for jj = 1:Nc 
-        watermarked_image(ii,jj)=bitset(watermarked_image(ii,jj),1,watermark(ii,jj));
-    end 
-end 
-
-% display watermarked image 
-set(handles.axes4,'HandleVisibility','ON');%打开坐标，方便操作
-axes(handles.axes4);%%使用图像，操作在坐标4
-imshow(watermarked_image,[]) 
-
+lsb;
 
 
 % --- Executes on button press in pushbutton5.
@@ -311,52 +265,7 @@ function pushbutton8_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % read in watermarked image 
-global watermarked_image;
-watermarked_object=watermarked_image; 
 
-% no attack
-if attack_style==0 
-    ww=watermarked_object; 
-end
-
-% attack
-% gaussian filtering
-if attack_style == 1 
-    k = fspecial('gaussian');   % define the filter operator
-    yy = filter2(k,watermarked_object)/255;
-    imwrite(yy,'lsb_watermarked_lpf.bmp','bmp');
-    ww=imread('lsb_watermarked_lpf.bmp');
-end
-% add Gaussian noise
-if attack_style==2
-    yy=imnoise(watermarked_object,'gaussian');
-    imwrite(yy,'lsb_watermarked_noise.bmp','bmp');
-    ww=imread('lsb_watermarked_noise.bmp');
-end
-% % double size (half size before recovering)
-% if attack_style==3
-%     xxx1=imresize(watermarked_object,2,'bicubic');
-%     xxx2=imresize(xxx1,1/2,'bicubic');
-%     yy=double(xxx2);
-%     imwrite(yy,'lsb_watermarked_enlarge.bmp','bmp');
-%     ww=imread('lsb_watermarked_enlarge.bmp');
-% end
- 
-% determine size of watermarked image 
-Mw=size(watermarked_object,1);	%Height 
-Nw=size(watermarked_object,2);	%Width 
- 
-% use lsb of watermarked image to recover watermark 
-for ii = 1:Mw 
-    for jj = 1:Nw 
-        watermark(ii,jj)=bitget(ww(ii,jj),1); 
-    end 
-end  
-  
-% scale and display recovered watermark 
-    set(handles.axes8,'HandleVisibility','ON');%打开坐标，方便操作
-    axes(handles.axes8);%%使用图像，操作在坐标8
-    imshow(watermark,[]) 
 
 % --- Executes on button press in pushbutton9.
 function pushbutton9_Callback(hObject, eventdata, handles)
