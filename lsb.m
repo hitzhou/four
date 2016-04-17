@@ -164,7 +164,7 @@ global f_id;
 %key是随机间隔的密钥
 vector = image;
 secret = watermark;
-output = 'C:\Users\Zhou\Desktop\matlab_watermark\output.bmp';
+output = 'file:///Users/zssec/Desktop/four/output.bmp';
 key = 1992;%密钥
 I1 = imread(vector);%读入载体lena灰度bmp图像
 ste_cover = double(I1);
@@ -228,22 +228,22 @@ global J1;
 
 %提取像素
 [row,col] = randinterval(ste_cover,len_total,key);
-frr = fopen(output,'w');
- for i = 1:len_total
-     if (bitand(ste_cover(row(i),col(i)),1) == 1)
-         fwrite(frr,1,'ubit1');
-         result(p,1) = 1;
-     else
-         fwrite(frr,0,'ubit1');
-         result(p,1) = 0;
-     end
-     if p == len_total
-         break
-     end
-     p = p+1;
- end
-fclose(frr);
-result = uint8(result);
+% frr = fopen(output,'w');
+%  for i = 1:len_total
+%      if (bitand(ste_cover(row(i),col(i)),1) == 1)
+%          fwrite(frr,1,'ubit1');
+%          result(p,1) = 1;
+%      else
+%          fwrite(frr,0,'ubit1');
+%          result(p,1) = 0;
+%      end
+%      if p == len_total
+%          break
+%      end
+%      p = p+1;
+%  end
+% fclose(frr);
+% result = uint8(result);
 set(handles.axes4,'HandleVisibility','ON');%打开坐标，方便操作
 axes(handles.axes4);%%使用图像，操作在坐标4
 imshow(J1);
