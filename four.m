@@ -22,7 +22,7 @@ function varargout = four(varargin)
 
 % Edit the above text to modify the response to help four
 
-% Last Modified by GUIDE v2.5 14-Apr-2016 23:13:33
+% Last Modified by GUIDE v2.5 17-Apr-2016 13:46:36
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -313,3 +313,11 @@ function axes11_CreateFcn(hObject, eventdata, handles)
 % handles    empty - handles not created until after all CreateFcns called
 
 % Hint: place code in OpeningFcn to populate axes11
+
+
+% --- Executes on button press in pushbutton13.
+function pushbutton13_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton13 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+CADriver;
