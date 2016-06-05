@@ -22,7 +22,7 @@ function varargout = nec(varargin)
 
 % Edit the above text to modify the response to help nec
 
-% Last Modified by GUIDE v2.5 16-Apr-2016 16:03:57
+% Last Modified by GUIDE v2.5 05-Jun-2016 16:44:26
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -101,8 +101,8 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 global M;
-global a;
 global window;
+global z;
 global K;
 global N;
 global H;
@@ -113,8 +113,8 @@ global BLOCK;
 global BLOCK2;
 
 M=512;    %原图像长度
-a=0.1;   %水印嵌入强度因子
-window=[7,7];  %中值滤波窗口大小
+% a=100;   %水印嵌入强度因子
+window=[z,z];  %中值滤波窗口大小
 K=8;
 N=M/K;
 H=zeros(M,M);
@@ -251,3 +251,44 @@ end
 set(handles.axes4,'HandleVisibility','ON');%打开坐标，方便操作
 axes(handles.axes4);%%使用图像，操作在坐标4
 imshow(L);
+
+
+% --- Executes on button press in pushbutton6.
+function pushbutton6_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global a;
+a = str2double(get(handles.edit1,'String'));
+
+
+
+function edit2_Callback(hObject, eventdata, handles)
+% hObject    handle to edit2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit2 as text
+%        str2double(get(hObject,'String')) returns contents of edit2 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit2_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in pushbutton7.
+function pushbutton7_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton7 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global z;
+z = str2double(get(handles.edit2,'String'));
